@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="UseSC:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/UseSC_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="UseSC" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/../lib/asm-6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../lib/asm-xml-6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../lib/asm-tree-6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../lib/asm-util-6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../lib/asm-commons-6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../lib/asm-analysis-6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../lib/cglib-nodep-3.2.5.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="UseSC/web/Web" />
+    </root>
+  </artifact>
+</component>
