@@ -5,6 +5,8 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import com.mysql.jdbc.*;
+import sc.ustc.config.ConfigMessage;
+
 /**
  * Created by mmn on 2017/12/25.
  */
@@ -79,11 +81,11 @@ public abstract class BaseDAO {
         return true;
     }
     //抽象方法
-    public abstract Object query(String sql); // 负责执行 sql 语句，并返回结果对象
+    public abstract Object query(String uname) throws SQLException; // 负责执行 sql 语句，并返回结果对象
 
-    public abstract boolean insert(String sql);//负责执行 sql 语句，并返回执行结果
+    public abstract boolean insert(Object object);//负责执行 sql 语句，并返回执行结果
 
-    public abstract boolean update(String sql); //负责执行 sql 语句，并返回执行结果
+    public abstract boolean update(Object object); //负责执行 sql 语句，并返回执行结果
 
-    public abstract boolean delete(String sql); //负责执行 sql 语句，并返回执行结果
+    public abstract boolean delete(Object object); //负责执行 sql 语句，并返回执行结果
 }

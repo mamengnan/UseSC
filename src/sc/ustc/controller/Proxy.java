@@ -25,23 +25,26 @@ public class Proxy {
             Class cla=Class.forName(action.getClassname());
             Enhancer enhancer = new Enhancer();
             enhancer.setSuperclass(cla);
-            enhancer.setCallback((MethodInterceptor) (obj, method, args, proxy) -> {
-               // reflect2.reflect(n1, m1,new Object[]{ac});
-                Stack<Interceptor> interceptorStack=new Stack<Interceptor>();
-                for(Interceptor interceptor:interceptors){
-                    interceptorStack.push(interceptor);
-                    reflect.reflect(interceptor.getClassname(),interceptor.getProdo(),new Object[]{action.getName()});
+            enhancer.setCallback(new MethodInterceptor() {
+                @Override
+                public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+                    // reflect2.reflect(n1, m1,new Object[]{ac});
+                    Stack<Interceptor> interceptorStack = new Stack<Interceptor>();
+                    for (Interceptor interceptor : interceptors) {
+                        interceptorStack.push(interceptor);
+                        reflect.reflect(interceptor.getClassname(), interceptor.getProdo(), new Object[]{action.getName()});
+                    }
+                    System.out.println("before method run...");
+                    Object result = proxy.invokeSuper(obj, args);
+                    System.out.println("result:" + result);
+                    //    reflect2.reflect(n1,m2,new Object[]{result.toString()});
+                    while (!interceptorStack.isEmpty()) {
+                        Interceptor afterint = interceptorStack.pop();
+                        reflect.reflect(afterint.getClassname(), afterint.getAfterdo(), new Object[]{result});
+                    }
+                    System.out.println("after method run...");
+                    return result;
                 }
-                System.out.println("before method run...");
-                Object result = proxy.invokeSuper(obj, args);
-                System.out.println("result:"+result);
-            //    reflect2.reflect(n1,m2,new Object[]{result.toString()});
-                while (!interceptorStack.isEmpty()){
-                    Interceptor afterint=interceptorStack.pop();
-                    reflect.reflect(afterint.getClassname(),afterint.getAfterdo(),new Object[]{result});
-                }
-                System.out.println("after method run...");
-                return result;
             });
             Object obj=enhancer.create();
             Object[] oo=new Object[]{request.getParameter("username"),request.getParameter("userpass")};

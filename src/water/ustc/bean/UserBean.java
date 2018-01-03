@@ -2,10 +2,12 @@ package water.ustc.bean;
 
 import water.ustc.dao.UserDAO;
 
+import java.sql.SQLException;
+
 /**
  * Created by mmn on 2017/12/25.
  */
-public class UserBean {
+public class UserBean extends BaseBean{
     private String  userId;
     private String userName;
     private String userPass;
@@ -17,15 +19,20 @@ public class UserBean {
     }
     public boolean signIn(){ //处理登录业务
        //userName构造sql
-        String sql="";
-        sql="select * from user where username='"+userName+"'";
+     //   String sql="";
+       // sql="select * from user where username='"+userName+"'";
         UserDAO dao=UserDAO.getInstance();
         /*
         dao.setUrl("jdbc:mysql://localhost:3306/userlist");
         dao.setDriver("com.mysql.jdbc.Driver");
         dao.setUserName("root");
         dao.setUserPassword("password");*/
-        UserBean obj=(UserBean)dao.query(sql);
+        UserBean obj= null;
+        try {
+            obj = (UserBean)dao.query(userName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         if(obj==null){
             return false;
         }else{

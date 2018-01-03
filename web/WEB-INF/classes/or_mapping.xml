@@ -2,11 +2,11 @@
     <jdbc>
         <property>
             <name>driver_class</name>
-            <value>com.mysql.jdbc.Driver</value>
+            <value>org.sqlite.JDBC</value>
         </property>
         <property>
             <name>url_path</name>
-            <value>jdbc:mysql://localhost:3306/j2ee?useSSL=false</value>
+            <value>jdbc:sqlite:D:\\SQLite\\userlist.db3</value>
         </property>
         <property>
             <name>db_username</name>
@@ -14,28 +14,28 @@
         </property>
         <property>
             <name>db_password</name>
-            <value></value>
+            <value>password</value>
         </property>
     </jdbc>
     <class>
         <name>UserBean</name>
-        <table>users</table>
-        <id>userId</id>
+        <table>user</table>
+        <id>userName</id>
         <property>
             <name>userId</name>
-            <column>id</column>
-            <type>int</type>
-            <lazy>true</lazy>
-        </property>
-        <property>
-            <name>userName</name>
-            <column>user_name</column>
+            <column>userid</column>
             <type>String</type>
             <lazy>true</lazy>
         </property>
         <property>
+            <name>userName</name>
+            <column>username</column>
+            <type>String</type>
+            <lazy>false</lazy>
+        </property>
+        <property>
             <name>userPass</name>
-            <column>user_password</column>
+            <column>userpassword</column>
             <type>String</type>
             <lazy>true</lazy>
         </property>

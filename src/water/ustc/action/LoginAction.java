@@ -22,7 +22,7 @@ public class LoginAction {
         boolean b=userBean.signIn();
         if(b){
             return "success";
-        }else{
+        }else {
             return "failure";
         }
 
