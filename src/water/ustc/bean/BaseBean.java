@@ -25,7 +25,9 @@ public abstract class BaseBean implements LazyLoader {
                         //会有nullPointer的错误
                         //Q：如何对非集合、非对象的属性进行延迟加载
                         //Q：如何不使用动态类编写通用的适应所有Bean的延迟加载方法
-                        thisProp.getWriteMethod().invoke(this, String.valueOf(this.lazyLoadDispatcher(props.get(thisProp.getName()))));
+                       thisProp.getWriteMethod().invoke(this, String.valueOf(this.lazyLoadDispatcher(props.get(thisProp.getName()))));
+                      //  Object o=this.lazyLoadDispatcher(props.get(thisProp.getName()));
+
                     }
                 }
             } catch (Exception e) {
@@ -46,14 +48,14 @@ public abstract class BaseBean implements LazyLoader {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       // Object ret=enhancer.create(this.getClass(), (Callback) obj);// lazyload....
-        //System.out.println(value.toString()+" ? "+ret.toString());
-        return enhancer.create(this.getClass(), (Callback) obj);// lazyload....
+        enhancer.setCallback((Callback) obj);
+        return enhancer.create();
+      //  return enhancer.create(this.getClass(), (Callback) obj);// lazyload....
     }
 
     @Override
     public Object loadObject() throws Exception {
         System.out.println("lazyload....");
-        return VALUE;
+        return VALUE;//还是 userbean类
     }
 }

@@ -44,7 +44,7 @@ public class UserDAO extends sc.ustc.dao.BaseDAO {
        UserBean userBean=new UserBean();
        userBean.setUserName(uname);
        Object object= Conversation.getObject(userBean);
-       closeDBConnection();
+      // closeDBConnection();
        return object;
     }
 

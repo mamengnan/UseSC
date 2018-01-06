@@ -20,7 +20,8 @@ this.getClass().getClassLoader().getResource("controller.xml").getPath()
  */
 public class SimpleController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-
+        System.out.println("contextpath:"+req.getContextPath());
+        System.out.println("servletpath"+req.getServletPath());
        // Map<String,String[]> paramap=(Map<String, String[]>) req.getParameterMap();
         Processor pro=Processor.getinstance();
         String result;

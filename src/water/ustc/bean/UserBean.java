@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Created by mmn on 2017/12/25.
  */
-public class UserBean extends BaseBean{
+public class UserBean { //basebean 的load接口可以放弃了
     private String  userId;
     private String userName;
     private String userPass;
@@ -37,6 +37,7 @@ public class UserBean extends BaseBean{
             return false;
         }else{
             String pwd=obj.getUserPass();
+            System.out.println("test lazy load:"+obj.getUserPass());
             if(userPass.equals(pwd)){
                 return true;
             }else{
